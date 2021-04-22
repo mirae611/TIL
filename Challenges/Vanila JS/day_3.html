@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Hello!</h2>
+
+    <script>
+        // <⚠️ DONT DELETE THIS ⚠️>
+        const colors = ["#1abc9c", "#3498db", "#9b59b6", "#f39c12", "#e74c3c"];
+        // <⚠️ /DONT DELETE THIS ⚠️>
+
+        /*
+        ✅ The text of the title should change when the mouse is on top of it.
+        ✅ The text of the title should change when the mouse is leaves it.
+        ✅ When the window is resized the title should change.
+        ✅ On right click the title should also change.
+        ✅ The colors of the title should come from a color from the colors array.
+        ✅ DO NOT CHANGE .css, or .html files.
+        ✅ ALL function handlers should be INSIDE of "superEventHandler"
+        */
+
+        const h2 = document.querySelector("h2");
+        const text = h2.innerText;
+        let count = 0;
+        const superEventHandler = {
+            changeColor: function () {
+                h2.style.color = colors[count % 5];
+                count++;
+            },
+            changetext: function () {
+                this.innerText = "The mouse is here!";
+                superEventHandler.changeColor();
+            },
+            origintext: function () {
+                this.style.color = "#000";
+                h2.innerText = text;
+            },
+            windowResize: function () {
+                h2.innerText = "You just resized!";
+                superEventHandler.changeColor();
+            },
+            rightClick: function (e) {
+                e.preventDefault();
+                h2.innerText = "That was a right click!";
+                superEventHandler.changeColor();
+            }
+        };
+
+        h2.addEventListener("mouseenter", superEventHandler.changetext);
+        h2.addEventListener("mouseleave", superEventHandler.origintext);
+        window.addEventListener("resize", superEventHandler.windowResize);
+        window.addEventListener("contextmenu", superEventHandler.rightClick);
+    </script>
+</body>
+
+</html>
