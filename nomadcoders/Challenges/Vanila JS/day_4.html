@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        changeBgColor();
+        window.addEventListener("resize", changeBgColor);
+        function changeBgColor() {
+            const width = window.outerWidth;
+            if (width > 992) {
+                document.body.style.backgroundColor = "#eebc12";
+            } else if (width > 768 && width <= 992) {
+                document.body.style.backgroundColor = "#904ead";
+            } else {
+                document.body.style.backgroundColor = "#2e8cd5";
+            }
+        }
+    </script>
+</body>
+
+</html>
