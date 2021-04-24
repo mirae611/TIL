@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Where are you from?</h1>
+    <select>
+        <option value="">--- Choose Your Country ---</option>
+        <option value="Korea">Korea</option>
+        <option value="Greece">Greece</option>
+        <option value="Turkey">Turkey</option>
+        <option value="Finland">Finland</option>
+    </select>
+    <script>
+        const select = document.querySelector("select");
+        const options = select.querySelectorAll("option");
+        const USER_LS = "currentCountry";
+
+        init();
+
+        function setSelected(value) {
+            options.forEach((e) =>
+                e.value === value ? e.setAttribute("selected", true) : ""
+            );
+        }
+
+        function saveCountry(e) {
+            const country = e.target.value;
+            localStorage.setItem(USER_LS, country);
+            setSelected(country);
+        }
+
+        function chooseCountry() {
+            select.addEventListener("change", saveCountry);
+        }
+
+        function laodCountry() {
+            const currentCountry = localStorage.getItem(USER_LS);
+            setSelected(currentCountry);
+            chooseCountry();
+        }
+
+        function init() {
+            laodCountry();
+        }
+    </script>
+</body>
+
+</html>
