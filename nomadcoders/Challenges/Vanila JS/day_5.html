@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const body = document.querySelector("body");
+        body.innerHTML =
+            "<h1>🎁크리스마스이브까지 남은 시간🎄</h1><p class='dday_txt'></p>";
+        const clockTitle = document.querySelector(".dday_txt");
+
+        init();
+
+        // You're gonna need this
+        function getTime() {
+            // Don't delete this.
+            const xmasDay = new Date("2021-12-24:00:00:00+0900");
+            const date = new Date();
+            const dday = xmasDay.getTime() - date.getTime();
+            const day = Math.floor(dday / (24 * 60 * 60 * 1000));
+            const hours = Math.floor((dday % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            const minutes = Math.floor((dday % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((dday % (60 * 1000)) / 1000);
+            clockTitle.innerText = `${day}일 ${hours < 10 ? "0" : ""}${hours}시간 ${minutes < 10 ? "0" : ""
+                }${minutes}분 ${seconds < 10 ? "0" : ""}${seconds}초`;
+        }
+
+        function init() {
+            getTime();
+            setInterval(getTime, 1000);
+        }
+    </script>
+</body>
+
+</html>
