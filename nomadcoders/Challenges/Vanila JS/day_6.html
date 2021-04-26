@@ -19,19 +19,24 @@
     </select>
     <script>
         const select = document.querySelector("select");
-        const options = select.querySelectorAll("option");
+        // const options = select.querySelectorAll("option");
         const USER_LS = "currentCountry";
 
         init();
 
         function setSelected(value) {
-            options.forEach((e) =>
-                e.value === value ? e.setAttribute("selected", true) : ""
-            );
+            if (value) {
+                const selectedOption = document.querySelector(`option[value="${value}"]`);
+                selectedOption.selected = true;
+            }
+            // options.forEach((e) =>
+            //   e.value === value ? e.setAttribute("selected", true) : ""
+            // );
         }
 
         function saveCountry(e) {
-            const country = e.target.value;
+            const country = select.value;
+            // const country = e.target.value;
             localStorage.setItem(USER_LS, country);
             setSelected(country);
         }
