@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Tasks</h1>
+    <form class="js-toDoForm">
+      <input type="text" placeholder="write a to do" />
+    </form>
+    <h2>Pending</h2>
+    <ul class="js-pendingList"></ul>
+    <h2>Finished</h2>
+    <ul class="js-finishedList"></ul>
+    <script>
+        const toDoForm = document.querySelector(".js-toDoForm");
+        const toDoInput = toDoForm.querySelector("input");
+        const pendingList = document.querySelector(".js-pendingList");
+        const finishedList = document.querySelector(".js-finishedList");
+        let toDos = [];
+        let finishedToDos = [];
+        const TODOS_LS = "toDos";
+        const FINISHED_LS = "finishedToDos";
+
+        init();
+
+        function backToDo(e) {
+            const btn = e.target;
+            const li = btn.parentNode;
+            const clearBtn = document.createElement("button");
+            clearBtn.innerText = "✔";
+            clearBtn.addEventListener("click", clearToDo);
+            finishedList.removeChild(li);
+            li.removeChild(btn);
+            li.appendChild(clearBtn);
+            pendingList.appendChild(li);
+            const cleanToDos = finishedToDos.filter(function (toDo) {
+                const toDoId = toDo.id;
+                const liId = parseInt(li.id, 10);
+                if (toDoId === liId) {
+                    toDos.push(toDo);
+                }
+                return toDoId !== liId;
+            });
+            finishedToDos = cleanToDos;
+            saveToDos();
+        }
+
+        function clearToDo(e) {
+            const btn = e.target;
+            const li = btn.parentNode;
+            const backBtn = document.createElement("button");
+            backBtn.innerText = "⏪";
+            backBtn.addEventListener("click", backToDo);
+            pendingList.removeChild(li);
+            li.removeChild(btn);
+            li.appendChild(backBtn);
+            finishedList.appendChild(li);
+            const cleanToDos = toDos.filter(function (toDo) {
+                const toDoId = toDo.id;
+                const liId = parseInt(li.id, 10);
+                if (toDoId === liId) {
+                    finishedToDos.push(toDo);
+                }
+                return toDoId !== liId;
+            });
+            toDos = cleanToDos;
+            saveToDos();
+        }
+
+        function deleteToDo(e) {
+            const btn = e.target;
+            const li = btn.parentNode;
+            const ul = li.parentNode;
+            const listName = ul.id;
+            ul.removeChild(li);
+            if (listName === "pending") {
+                const cleanToDos = toDos.filter(function (toDo) {
+                    return toDo.id !== parseInt(li.id, 10);
+                });
+                toDos = cleanToDos;
+            } else if (listName === "finished") {
+                const cleanFinishedToDos = finishedToDos.filter(function (toDo) {
+                    return toDo.id !== parseInt(li.id, 10);
+                });
+                finishedToDos = cleanFinishedToDos;
+            }
+            saveToDos();
+        }
+
+        function saveToDos() {
+            localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+            localStorage.setItem(FINISHED_LS, JSON.stringify(finishedToDos));
+        }
+
+        function paintToDo(text) {
+            const li = document.createElement("li");
+            const delBtn = document.createElement("button");
+            const clearBtn = document.createElement("button");
+            const span = document.createElement("span");
+            const newId = toDos.length + 1;
+            delBtn.innerText = "❌";
+            clearBtn.innerText = "✔";
+            delBtn.addEventListener("click", deleteToDo);
+            clearBtn.addEventListener("click", clearToDo);
+            span.innerText = text;
+            li.appendChild(span);
+            li.appendChild(delBtn);
+            li.appendChild(clearBtn);
+            li.id = newId;
+            pendingList.appendChild(li);
+            const toDoObj = {
+                text: text,
+                id: newId
+            };
+            toDos.push(toDoObj);
+            saveToDos();
+        }
+
+        function paintFinishedToDo(text) {
+            const li = document.createElement("li");
+            const delBtn = document.createElement("button");
+            const backBtn = document.createElement("button");
+            const span = document.createElement("span");
+            const finishedId = finishedToDos.length + 1;
+            delBtn.innerText = "❌";
+            backBtn.innerText = "⏪";
+            delBtn.addEventListener("click", deleteToDo);
+            backBtn.addEventListener("click", backToDo);
+            span.innerText = text;
+            li.appendChild(span);
+            li.appendChild(delBtn);
+            li.appendChild(backBtn);
+            li.id = finishedId;
+            finishedList.appendChild(li);
+            const toDoObj = {
+                text: text,
+                id: finishedId
+            };
+            finishedToDos.push(toDoObj);
+            saveToDos();
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const currentValue = toDoInput.value;
+            paintToDo(currentValue);
+            toDoInput.value = "";
+        }
+
+        function loadToDos() {
+            const loadedToDos = localStorage.getItem(TODOS_LS);
+            const finishedToDos = localStorage.getItem(FINISHED_LS);
+            if (loadedToDos !== null) {
+                const parsedToDos = JSON.parse(loadedToDos);
+                parsedToDos.forEach(function (toDo) {
+                    paintToDo(toDo.text);
+                });
+            }
+            if (finishedToDos !== null) {
+                const parsedFinished = JSON.parse(finishedToDos);
+                parsedFinished.forEach(function (finished) {
+                    paintFinishedToDo(finished.text);
+                });
+            }
+        }
+
+        function init() {
+            loadToDos();
+            toDoForm.addEventListener("submit", handleSubmit);
+        }
+    </script>
+</body>
+
+</html>
