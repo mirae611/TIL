@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="js-clock clock">
+        <h1>00:00</h1>
+    </div>
+    <script>
+        const clockContainer = document.querySelector('.js-clock');
+            clockTitle = clockContainer.querySelector('h1');
+
+        init();
+
+        function getTime() {
+            const date = new Date();
+                hours = date.getHours();
+                minuites = date.getMinutes();
+                seconds = date.getSeconds();
+                clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours}:${minuites < 10 ? `0${minuites}` : minuites}:${seconds < 10 ? `0${seconds}` : seconds}`;
+        }
+
+        function init() {
+            getTime();
+            setInterval(getTime, 1000);
+        }
+    </script>
+</body>
+</html>
