@@ -11,7 +11,7 @@
 <body>
     <h1>Tasks</h1>
     <form class="js-toDoForm">
-      <input type="text" placeholder="write a to do" />
+        <input type="text" placeholder="write a to do" />
     </form>
     <h2>Pending</h2>
     <ul class="js-pendingList"></ul>
@@ -22,157 +22,144 @@
         const toDoInput = toDoForm.querySelector("input");
         const pendingList = document.querySelector(".js-pendingList");
         const finishedList = document.querySelector(".js-finishedList");
-        let toDos = [];
-        let finishedToDos = [];
-        const TODOS_LS = "toDos";
-        const FINISHED_LS = "finishedToDos";
+        const PENDING = "pending";
+        const FINISHED = "finished";
+        let pendingItems = [];
+        let finishedItems = [];
 
         init();
 
-        function backToDo(e) {
-            const btn = e.target;
-            const li = btn.parentNode;
-            const clearBtn = document.createElement("button");
-            clearBtn.innerText = "✔";
-            clearBtn.addEventListener("click", clearToDo);
-            finishedList.removeChild(li);
-            li.removeChild(btn);
-            li.appendChild(clearBtn);
-            pendingList.appendChild(li);
-            const cleanToDos = finishedToDos.filter(function (toDo) {
-                const toDoId = toDo.id;
-                const liId = parseInt(li.id, 10);
-                if (toDoId === liId) {
-                    toDos.push(toDo);
-                }
-                return toDoId !== liId;
+        function getItemObject(text) {
+            return {
+                id: String(Date.now()),
+                text
+            };
+        }
+
+        function savePending(item) {
+            pendingItems.push(item);
+        }
+
+        function findInFinished(itemId) {
+            return finishedItems.find(function (item) {
+                return item.id === itemId;
             });
-            finishedToDos = cleanToDos;
+        }
+
+        function findInPending(itemId) {
+            return pendingItems.find(function (item) {
+                return item.id === itemId;
+            });
+        }
+
+        function removeFromPending(itemId) {
+            pendingItems = pendingItems.filter(function (item) {
+                return item.id !== itemId;
+            });
+        }
+
+        function removeFromFinished(itemId) {
+            finishedItems = finishedItems.filter(function (item) {
+                return item.id !== itemId;
+            });
+        }
+
+        function addToFinished(item) {
+            finishedItems.push(item);
+        }
+
+        function addToPending(item) {
+            pendingItems.push(item);
+        }
+
+        function deleteItem(e) {
+            const li = e.target.parentNode;
+            li.parentNode.removeChild(li);
+            removeFromFinished(li.id);
+            removeFromPending(li.id);
             saveToDos();
         }
 
-        function clearToDo(e) {
-            const btn = e.target;
-            const li = btn.parentNode;
+        function handlecompleteClick(e) {
+            const li = e.target.parentNode;
+            li.parentNode.removeChild(li);
+            const item = findInPending(li.id);
+            removeFromPending(li.id);
+            addToFinished(item);
+            paintFinished(item);
+            saveToDos();
+        }
+
+        function handleBackClick(e) {
+            const li = e.target.parentNode;
+            li.parentNode.removeChild(li);
+            const item = findInFinished(li.id);
+            removeFromFinished(li.id);
+            addToPending(item);
+            paintPending(item);
+            saveToDos();
+        }
+
+        function buildListItem(item) {
+            console.log(item);
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            const delBtn = document.createElement("button");
+            span.innerText = item.text;
+            delBtn.innerText = "❌";
+            delBtn.addEventListener("click", deleteItem);
+            li.append(span);
+            li.append(delBtn);
+            li.id = item.id;
+            return li;
+        }
+
+        function paintFinished(item) {
+            const li = buildListItem(item);
             const backBtn = document.createElement("button");
             backBtn.innerText = "⏪";
-            backBtn.addEventListener("click", backToDo);
-            pendingList.removeChild(li);
-            li.removeChild(btn);
-            li.appendChild(backBtn);
-            finishedList.appendChild(li);
-            const cleanToDos = toDos.filter(function (toDo) {
-                const toDoId = toDo.id;
-                const liId = parseInt(li.id, 10);
-                if (toDoId === liId) {
-                    finishedToDos.push(toDo);
-                }
-                return toDoId !== liId;
-            });
-            toDos = cleanToDos;
-            saveToDos();
+            backBtn.addEventListener("click", handleBackClick);
+            li.append(backBtn);
+            finishedList.append(li);
         }
 
-        function deleteToDo(e) {
-            const btn = e.target;
-            const li = btn.parentNode;
-            const ul = li.parentNode;
-            const listName = ul.id;
-            ul.removeChild(li);
-            if (listName === "pending") {
-                const cleanToDos = toDos.filter(function (toDo) {
-                    return toDo.id !== parseInt(li.id, 10);
-                });
-                toDos = cleanToDos;
-            } else if (listName === "finished") {
-                const cleanFinishedToDos = finishedToDos.filter(function (toDo) {
-                    return toDo.id !== parseInt(li.id, 10);
-                });
-                finishedToDos = cleanFinishedToDos;
-            }
-            saveToDos();
+        function paintPending(item) {
+            const li = buildListItem(item);
+            const completeBtn = document.createElement("button");
+            completeBtn.innerText = "✔";
+            completeBtn.addEventListener("click", handlecompleteClick);
+            li.append(completeBtn);
+            pendingList.append(li);
+        }
+
+        function restoreToDos() {
+            pendingItems.forEach(e => paintPending(e));
+            finishedItems.forEach(e => paintFinished(e));
         }
 
         function saveToDos() {
-            localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
-            localStorage.setItem(FINISHED_LS, JSON.stringify(finishedToDos));
+            localStorage.setItem(PENDING, JSON.stringify(pendingItems));
+            localStorage.setItem(FINISHED, JSON.stringify(finishedItems));
         }
 
-        function paintToDo(text) {
-            const li = document.createElement("li");
-            const delBtn = document.createElement("button");
-            const clearBtn = document.createElement("button");
-            const span = document.createElement("span");
-            const newId = toDos.length + 1;
-            delBtn.innerText = "❌";
-            clearBtn.innerText = "✔";
-            delBtn.addEventListener("click", deleteToDo);
-            clearBtn.addEventListener("click", clearToDo);
-            span.innerText = text;
-            li.appendChild(span);
-            li.appendChild(delBtn);
-            li.appendChild(clearBtn);
-            li.id = newId;
-            pendingList.appendChild(li);
-            const toDoObj = {
-                text: text,
-                id: newId
-            };
-            toDos.push(toDoObj);
-            saveToDos();
-        }
-
-        function paintFinishedToDo(text) {
-            const li = document.createElement("li");
-            const delBtn = document.createElement("button");
-            const backBtn = document.createElement("button");
-            const span = document.createElement("span");
-            const finishedId = finishedToDos.length + 1;
-            delBtn.innerText = "❌";
-            backBtn.innerText = "⏪";
-            delBtn.addEventListener("click", deleteToDo);
-            backBtn.addEventListener("click", backToDo);
-            span.innerText = text;
-            li.appendChild(span);
-            li.appendChild(delBtn);
-            li.appendChild(backBtn);
-            li.id = finishedId;
-            finishedList.appendChild(li);
-            const toDoObj = {
-                text: text,
-                id: finishedId
-            };
-            finishedToDos.push(toDoObj);
-            saveToDos();
+        function loadToDos() {
+            pendingItems = JSON.parse(localStorage.getItem(PENDING)) || [];
+            finishedItems = JSON.parse(localStorage.getItem(FINISHED)) || [];
         }
 
         function handleSubmit(e) {
             e.preventDefault();
-            const currentValue = toDoInput.value;
-            paintToDo(currentValue);
-            toDoInput.value = "";
-        }
-
-        function loadToDos() {
-            const loadedToDos = localStorage.getItem(TODOS_LS);
-            const finishedToDos = localStorage.getItem(FINISHED_LS);
-            if (loadedToDos !== null) {
-                const parsedToDos = JSON.parse(loadedToDos);
-                parsedToDos.forEach(function (toDo) {
-                    paintToDo(toDo.text);
-                });
-            }
-            if (finishedToDos !== null) {
-                const parsedFinished = JSON.parse(finishedToDos);
-                parsedFinished.forEach(function (finished) {
-                    paintFinishedToDo(finished.text);
-                });
-            }
+            const itemObj = getItemObject(toDoInput.value);
+            toDoInput.value = '';
+            paintPending(itemObj);
+            savePending(itemObj);
+            saveToDos();
         }
 
         function init() {
-            loadToDos();
             toDoForm.addEventListener("submit", handleSubmit);
+            loadToDos();
+            restoreToDos();
         }
     </script>
 </body>
