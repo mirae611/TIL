@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        
+        @font-face {
+            font-family: 'paybooc-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            overflow-y: hidden;
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'paybooc-Bold';
+            color: #fff;
+        }
+
+        input{
+            height: 50px;
+            padding: 0 10px;
+            border-radius: 5px;
+            border: 0;
+        }
+
+        .container {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .weather {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+        }
+
+        .clock {
+            font-weight: bold;
+            font-size: 100px;
+        }
+
+        .greetings {
+            margin: 20px 0;
+            font-size: 30px;
+        }
+
+        .list_title {
+            margin: 20px 0;
+        }
+
+        .btn_toDoList {
+            padding: 10px;
+            border: 0;
+            background-color: transparent;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .btn_toDoList.fold::before,
+        .btn_toDoList.fold::after {
+            content: '🔽';
+        }
+        .btn_toDoList.unfold::before,
+        .btn_toDoList.unfold::after {
+            content: '🔼';
+        }
+        .toDoContainer {
+            overflow: hidden;
+        }
+        .toDoContainer.fold {
+            display: none;
+        }
+        .toDoContainer.unfold {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="js-weather weather"></span>
+
+    <div class="container">
+        <div class="js-clock clock">
+            <p>00:00</p>
+        </div>
+
+        <p class="greetings"><span id="js-timeGreetings"></span><span id="js-nameGreetings"></span></p>
+
+        <form id="js-userForm" class="userForm">
+            <input type="text" name="" id="userInput" placeholder="What is your name?">
+        </form>
+        
+
+        <button id="toDoListBtn" class="btn_toDoList fold">할 일 목록</button>
+        <div class="toDoContainer">
+            <form id="js-toDoForm" class="toDoForm">
+                <input type="text" name="" id="toDoInput" placeholder="write a to do">
+            </form>
+            <p class="list_title">해야하는 일</p>
+            <ul id="js-pendingList"></ul>
+            <p class="list_title">완료한 일</p>
+            <ul id="js-finishedList"></ul>
+        </div>
+    </div>
+
+
+
+    <!-- <script src="/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/js/Getting_the_Weather.js"></script>
+    <script src="/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/js/Saving_the_User_Name.js"></script>
+    <script src="/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/js/To_Do_List.js"></script>
+    <script src="/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/js/Image_Background.js"></script>
+    <script src="/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/js/Making_a_Clock.js"></script> -->
+    <script src="js/Making_a_Clock.js"></script>
+    <script src="js/Saving_the_User_Name.js"></script>
+    <script src="js/To_Do_List.js"></script>
+    <script src="js/Image_Background.js"></script>
+    <script src="js/Getting_the_Weather.js"></script>
+</body>
+
+</html>
