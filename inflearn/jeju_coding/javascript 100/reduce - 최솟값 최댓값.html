@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	let a = [6, 5, 4, 3, 2];
+	const reducerOne = (accumulator, currentvalue) => accumulator + currentvalue;
+	const reducerTwo = (accumulator, currentvalue) => accumulator - currentvalue;
+	const reducerThree = (accumulator, currentvalue) => accumulator > currentvalue ? accumulator : currentvalue;
+	const reducerFour = (accumulator, currentvalue) => accumulator < currentvalue ? accumulator : currentvalue;
+	
+	console.log(a.reduce(reducerOne));
+	console.log(a.reduce(reducerTwo));
+	console.log(a.reduce(reducerThree));
+	console.log(a.reduce(reducerFour));
+	</script>
+</body>
+</html>
