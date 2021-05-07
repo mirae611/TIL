@@ -6,15 +6,20 @@
 - Big Data
 
 ## Front-end
-### DreamCoding
-- JavaScript Basic (자바스트립트 기초 강의 (ES5+))
-### NomadCoders
-- 바닐라 JS로 크롬 앱 만들기
+### JavaScript
+- [DreamCoding] JavaScript Basic (자바스트립트 기초 강의 (ES5+))
+- [NomadCoders] 바닐라 JS로 크롬 앱 만들기
   - https://mirae611.github.io/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/Final.html
-  - 수료증
-- 바닐라 JS로 그림판 만들기
-### Inflearn
-##### 장기효(캡틴판교)
-- Vue.js 시작하기 - Age of Vue.js
-##### 제주코딩베이스캠프
-- Code Festival: JavaScript 100제
+  - [수료증](https://nomadcoders.co/certs/e2a43230-3d7e-47fc-b1e3-c7aa75f7c271)
+- [NomadCoders] 바닐라 JS로 그림판 만들기
+  - https://mirae611.github.io/TIL/nomadcoders/Courses/Creating_Paint_with_Vanilla_JS/Creating_Paint.html
+  - [수료증](https://nomadcoders.co/certs/c38d4d82-d7f6-4366-82b5-00a502c73f56)
+- [Inflearn] Vue.js 시작하기 - Age of Vue.js
+- [Inflearn] Code Festival: JavaScript 100제
+- [WesBos] JavaScript30
+### Vue
+- [Inflearn] 웹 게임을 만들며 배우는 Vue
+
+## Algorithm
+- [Inflearn] Code Festival: JavaScript 100제
+- [Inflearn] 영리한 프로그래밍을 위한 알고리즘 강좌
