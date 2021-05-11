@@ -129,4 +129,38 @@ var vm = new Vue({
 </script>
 ```
 
+### 컴포넌트 통신 방법 - 응용
+
+```javascript
+<div id="app">
+    <app-header></app-header>
+    <app-content
+    ></app-content>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var appHeader = {
+        template: '<div>header</div>'
+    }
+    var appContent = {
+        template: '<div>content<button @click="passNum">pass</button></div>',
+        methods: {
+            passNum: function() {
+                this.$emit('pass', 10);
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        components: {
+            'app-header': appHeader,
+            'app-content': appContent
+        },
+        data: {
+            num: 0
+        }
+    });
+</script>
+```
+
 
