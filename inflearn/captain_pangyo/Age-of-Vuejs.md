@@ -133,13 +133,13 @@ var vm = new Vue({
 
 ```javascript
 <div id="app">
-    <app-header></app-header>
-    <app-content
-    ></app-content>
+    <app-header :propsdata="num"></app-header>
+    <app-content @pass="deliverNum"></app-content>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     var appHeader = {
+        props: ['propsdata'],
         template: '<div>header</div>'
     }
     var appContent = {
@@ -158,6 +158,11 @@ var vm = new Vue({
         },
         data: {
             num: 0
+        },
+        methods: {
+            deliverNum: function(value) {
+                this.num = value;
+            }
         }
     });
 </script>
