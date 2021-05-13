@@ -15,7 +15,7 @@ var vm = new Vue({
 
 ### 컴포넌트
 
-```javascript
+```html
 <div id="app">
     <app-header></app-header>
     <app-content></app-content>
@@ -52,7 +52,7 @@ var vm = new Vue({
 
 ### 컴포넌트 통신 방법 - 기본
 #### props
-```javascript
+```html
 <div id="app">
     <app-header :propsdata="message"></app-header>
     <app-content :propsnum="num"></app-content>
@@ -83,7 +83,7 @@ var vm = new Vue({
 ```
 
 #### emit
-```javascript
+```html
 <div id="app">
     <app-header @pass="logText"></app-header>
     <app-content @count="countNumber"></app-content>
@@ -131,7 +131,7 @@ var vm = new Vue({
 
 ### 컴포넌트 통신 방법 - 응용
 
-```javascript
+```html
 <div id="app">
     <app-header :propsdata="num"></app-header>
     <app-content @pass="deliverNum"></app-content>
@@ -164,6 +164,52 @@ var vm = new Vue({
                 this.num = value;
             }
         }
+    });
+</script>
+```
+
+### 뷰 라우터
+뷰 라우터는 뷰 라이브러리를 이용하여 싱글 페이지 애플리케이션을 구현할 때 사용하는 라이브러리
+
+```html
+<div id="app">
+    <div>
+        <router-link to="/login">Login</router-link>
+        <router-link to="/main">Main</router-link>
+    </div>
+    <router-view></router-view>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+<script>
+    var LoginComponenet = {
+        template: '<div>login</div>'
+    }
+    var MainComponent = {
+        template: '<div>main</div>'
+    }
+
+    var router = new VueRouter({
+        // routes에는 페이지의 라우팅 정보
+        routes: [
+            {
+                // path: url
+                path: '/login',
+                // component: 해당 url에 표시될 component
+                component: LoginComponenet
+            },
+            {
+                path: '/main',
+                component: MainComponent
+            }
+        ]
+    });
+
+    new Vue({
+        el: '#app',
+        router: router,
+        components: {}
     });
 </script>
 ```
