@@ -214,4 +214,39 @@ var vm = new Vue({
 </script>
 ```
 
+### axios
+참고자료 - [axios](https://github.com/axios/axios)
 
+```html
+<div id="app">
+    <button @click="getData">get user</button>
+    <div>
+        {{ users }}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            users: []
+        },
+        methods: {
+            getData: function() {
+                var vm = this;
+                // jsonplaceholder라는 것은 rest api라고해서 js로 api를 요청할 때 테스트 해볼 수 있는 사이트
+                axios.get('https://jsonplaceholder.typicode.com/users')
+                .then(function (response) {
+                    console.log(response.data);
+                    vm.users = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    });
+</script>
+```
