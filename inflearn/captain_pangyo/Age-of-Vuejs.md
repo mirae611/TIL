@@ -317,86 +317,87 @@ var vm = new Vue({
 #### watch
 ```html
 <div id="app">
-		{{num}}
-		<button @click="addNum">increase</button>
+    {{num}}
+    <button @click="addNum">increase</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-		new Vue({
-				el: '#app',
-				data: {
-						num: 10
-				},
-				watch: {
-						num: function() {
-								this.logText();
-						}
-				},
-				methods: {
-						addNum: function(){
-								this.num++;
-						},
-						logText: function(){
-								console.log('changed');
-						}
-				}
-		});
+    new Vue({
+        el: '#app',
+        data: {
+            num: 10
+        },
+        watch: {
+            num: function () {
+                this.logText();
+            }
+        },
+        methods: {
+            addNum: function () {
+                this.num++;
+            },
+            logText: function () {
+                console.log('changed');
+            }
+        }
+    });
 </script>
 ```
 #### watch와 computed
-computed
-- 단순한 값에 대한 계산에 사용한다.
-watch
-- 무거운 로직에 사용한다. 무거운 로직은 매번 사용되기는 부담되는 동작등을 말한다. 
-- 데이터 요청에 적합하다.
+- computed
+	- 단순한 값에 대한 계산에 사용한다.  
+
+- watch
+	- 무거운 로직에 사용한다. 무거운 로직은 매번 사용되기는 부담되는 동작등을 말한다. 
+	- 데이터 요청에 적합하다.
 
 ```html
 <div id="app">
-		{{num}}
+    {{num}}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-		new Vue({
-				el: '#app',
-				data: {
-						num: 10
-				},
-				computed: {
-						doubleNum: function () {
-								return this.num * 2;
-						}
-				},
-				watch: {
-						num: function (newValue, oldValue) {
-								this.fetchUserByNumber(newValue);
-						}
-				},
-				methods: {
-						fetchUserByNumber: function (num) {
-								console.log(num);
-								// axios.get(num);
-						}
-				}
-		});
+    new Vue({
+        el: '#app',
+        data: {
+            num: 10
+        },
+        computed: {
+            doubleNum: function () {
+                return this.num * 2;
+            }
+        },
+        watch: {
+            num: function (newValue, oldValue) {
+                this.fetchUserByNumber(newValue);
+            }
+        },
+        methods: {
+            fetchUserByNumber: function (num) {
+                console.log(num);
+                // axios.get(num);
+            }
+        }
+    });
 </script>
 ```
 #### computed의 활용
 ```html
 <div id="app">
-		<p :class="{warning: isError}">Hello</p>
+    <p :class="{warning: isError}">Hello</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-		new Vue({
-				el: '#app',
-				data: {
-						isError: false
-				},
-				computed: {
-						errorTextColor: function() {
-								return this.isError ? 'warning' : null;
-						}
-				}
-		});
+    new Vue({
+        el: '#app',
+        data: {
+            isError: false
+        },
+        computed: {
+            errorTextColor: function () {
+                return this.isError ? 'warning' : null;
+            }
+        }
+    });
 </script>
 ```
