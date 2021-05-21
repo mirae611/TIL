@@ -7,10 +7,8 @@
 ### JavaScript
 - 바닐라 JS로 크롬 앱 만들기
   - https://mirae611.github.io/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/Final.html
-  - [수료증](https://nomadcoders.co/certs/e2a43230-3d7e-47fc-b1e3-c7aa75f7c271)
 - 바닐라 JS로 그림판 만들기
   - https://mirae611.github.io/TIL/nomadcoders/Courses/Creating_Paint_with_Vanilla_JS/Creating_Paint.html
-  - [수료증](https://nomadcoders.co/certs/c38d4d82-d7f6-4366-82b5-00a502c73f56)
 - JavaScript 30 Day Challenge
 - JavaScript Basic
 ### Vue
