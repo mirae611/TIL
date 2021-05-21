@@ -11,7 +11,7 @@
 - JavaScript Basic
 ### Vue
 - Vue.js 시작하기 - Age of Vue.js
-- 웹 게임을 만들며 배우는 Vue
+- Web Game with Vue
 ## Algorithm
 - [Code Festival: JavaScript 100제](https://www.notion.so/infuture/STUDY-4e55922f04fb49168e891160f2bc5614#d9ce234e875f47b7816a68e40d3acb1b)
 - 영리한 프로그래밍을 위한 알고리즘
