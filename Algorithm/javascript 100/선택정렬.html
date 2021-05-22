@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	// 선택정렬
+	//selectionSort()
+	function selectionSort() {
+		let a = [10, 11, 9, 2, 3, 6, 5, 4];
+		let sortedArray= [];
+		for (let i = 0; i < a.length; i++) {
+			const min = Math.min(...a);
+			// Math.min(...a) === Math.min.apply(null, a)
+			const minIndex = a.indexOf(min);
+			sortedArray.push(min);
+			a.splice(minIndex, 1);
+			console.log(a);
+			console.log(sortedArray);
+		}
+	}
+	</script>
+</body>
+</html>
