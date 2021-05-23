@@ -1,4 +1,4 @@
-# Today I Learned
+# What I studied
 - Front-end
 - Algorithm
 - Refactoring
