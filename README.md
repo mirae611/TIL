@@ -7,8 +7,8 @@
 - [프론트엔드 실무 완성](https://github.com/mirae611/TIL/tree/main/Front-end/Front-end%20Project)
 ### JavaScript
 - 자바스크립트 머신러닝 TensorFlow.js
-- [바닐라 JS로 크롬 앱 만들기](https://mirae611.github.io/TIL/nomadcoders/Courses/Create_a_Chrome_app_with_vanilla_JS/Final.html)
-- [바닐라 JS로 그림판 만들기](https://mirae611.github.io/TIL/nomadcoders/Courses/Creating_Paint_with_Vanilla_JS/Creating_Paint.html)
+- [바닐라 JS로 크롬 앱 만들기](https://mirae611.github.io/TIL/Front-end/JavaScript/Create_a_Chrome_app_with_vanilla_JS/Final.html)
+- [바닐라 JS로 그림판 만들기](https://mirae611.github.io/TIL/Front-end/JavaScript/Creating_Paint_with_Vanilla_JS/Creating_Paint.html)
 - JavaScript 30 Day Challenge
 - JavaScript Basic
 ### Vue
