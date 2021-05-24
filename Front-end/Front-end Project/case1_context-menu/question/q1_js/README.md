@@ -20,7 +20,7 @@ items.forEach(function (item) {
   });
 });
 ```
-#### 문제점
+**문제점**
 - 이벤트 감지 대상이 너무 많음
     - 성능 저하로 이어짐
     - list가 고정되어있지않고 계속 변화할 수도 있음  
@@ -41,13 +41,13 @@ wrapper.addEventListener("click", function (e) {
   });
 });
 ```  
-이벤트 리스너의 등록은 가급적 최소화 하는것이 좋음
-  - 이벤트의 bubbling과 capturing을 정확히 이해해야 함
-      - 이 예제에서 wrapper에 click event를 등록했는데 어떻게 안쪽에있는 대상을 클릭한것이 동작이 될까?  
-      클릭이벤트가 버블링이 이루어지기 때문.  
-      wrapper가 item보다 상위에 있는 DOM형태로, item에서 click event가 발생하면 bubbling에 의해서 wrapper까지 전달된다.  
-      wrapper에 전달되는 순간 click event가 발생.  
-      실제로 클릭이 일어난 곳은 e.target인 item으로 되어있음.  
+- 이벤트 리스너의 등록은 가급적 최소화 하는것이 좋음
+- 이벤트의 bubbling과 capturing을 정확히 이해해야 함
+    - 이 예제에서 wrapper에 click event를 등록했는데 어떻게 안쪽에있는 대상을 클릭한것이 동작이 될까?  
+    클릭이벤트가 버블링이 이루어지기 때문.  
+    wrapper가 item보다 상위에 있는 DOM형태로, item에서 click event가 발생하면 bubbling에 의해서 wrapper까지 전달된다.  
+    wrapper에 전달되는 순간 click event가 발생.  
+    실제로 클릭이 일어난 곳은 e.target인 item으로 되어있음.  
 　  
 　  
 ### 개선된 코드 2
