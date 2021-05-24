@@ -1,3 +1,4 @@
+# Age-of-Vuejs.md  
 - [인스턴스](#chapter-1)
 - [컴포넌트](#chapter-2)
 - [컴포넌트 통신 방법 - 기본](#chapter-3)
@@ -9,8 +10,10 @@
 - 프로젝트 생성 도구 - Vue CLI
 - 싱글 파일 컴포넌트
 - 최종 프로젝트 - 사용자 입력 폼 만들기  
-
-### 인스턴스<a id="chapter-1"></a>
+　  
+　  
+　  
+## 인스턴스<a id="chapter-1"></a>
 
 ```javascript
 var vm = new Vue({
@@ -22,11 +25,10 @@ var vm = new Vue({
         
     }
 });
-```
-   
-   
-### 컴포넌트<a id="chapter-2"></a>
-
+```  
+　  
+　  
+## 컴포넌트<a id="chapter-2"></a>
 ```html
 <div id="app">
     <app-header></app-header>
@@ -60,10 +62,11 @@ var vm = new Vue({
         el: '#app2'
     })
 </script>
-```
-
-### 컴포넌트 통신 방법 - 기본<a id="chapter-3"></a>
-#### props
+```  
+　  
+　  
+## 컴포넌트 통신 방법 - 기본<a id="chapter-3"></a>
+### props
 ```html
 <div id="app">
     <app-header :propsdata="message"></app-header>
@@ -92,9 +95,9 @@ var vm = new Vue({
         }
     });
 </script>
-```
-
-#### emit
+```  
+　  
+### emit
 ```html
 <div id="app">
     <app-header @pass="logText"></app-header>
@@ -139,10 +142,10 @@ var vm = new Vue({
         }
     });
 </script>
-```
-
-### 컴포넌트 통신 방법 - 응용<a id="chapter-4"></a>
-
+```  
+　  
+　  
+## 컴포넌트 통신 방법 - 응용<a id="chapter-4"></a>
 ```html
 <div id="app">
     <app-header :propsdata="num"></app-header>
@@ -178,9 +181,10 @@ var vm = new Vue({
         }
     });
 </script>
-```
-
-### 뷰 라우터<a id="chapter-5"></a>
+```  
+　  
+　  
+## 뷰 라우터<a id="chapter-5"></a>
 뷰 라우터는 뷰 라이브러리를 이용하여 싱글 페이지 애플리케이션을 구현할 때 사용하는 라이브러리
 
 ```html
@@ -224,11 +228,11 @@ var vm = new Vue({
         components: {}
     });
 </script>
-```
-
-### HTTP 통신 라이브러리 - axios<a id="chapter-6"></a>
+```  
+　  
+　  
+## HTTP 통신 라이브러리 - axios<a id="chapter-6"></a>
 참고자료 - [axios](https://github.com/axios/axios)
-
 ```html
 <div id="app">
     <button @click="getData">get user</button>
@@ -261,11 +265,11 @@ var vm = new Vue({
         }
     });
 </script>
-```
-
-### 템플릿문법 - 기본<a id="chapter-7"></a>
+```  
+　  
+　  
+## 템플릿문법 - 기본<a id="chapter-7"></a>
 참고자료 - [axios](https://github.com/axios/axios)
-
 ```html
 <div id="app">
     <!-- 데이터 바인딩 -->
@@ -311,10 +315,11 @@ var vm = new Vue({
         }
     });
 </script>
-```   
-   
-### 템플릿문법 - 실전<a id="chapter-8"></a>
-#### watch
+```  
+　  
+　  
+## 템플릿문법 - 실전<a id="chapter-8"></a>
+### watch
 ```html
 <div id="app">
     {{num}}
@@ -342,8 +347,9 @@ var vm = new Vue({
         }
     });
 </script>
-```
-#### watch와 computed
+```  
+　  
+### watch와 computed
 - computed
 	- 단순한 값에 대한 계산에 사용한다.  
 
@@ -380,8 +386,9 @@ var vm = new Vue({
         }
     });
 </script>
-```
-#### computed의 활용
+```  
+　  
+### computed의 활용
 ```html
 <div id="app">
     <p :class="{warning: isError}">Hello</p>
