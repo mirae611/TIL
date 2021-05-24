@@ -17,6 +17,7 @@ Q. 버튼을 클릭하면 컨텍스트 메뉴가 나타나고, 메뉴를 선택�
 
 ### 문제
 Q1. 문제 상황에 대하여 Java Script로 동작을 구현시킬 수 있는 코드를 작성해보세요 [`Note 보기`](https://github.com/mirae611/TIL/tree/main/Front-end/Front-end%20Project/case1_context-menu/question/q1_js#q1---1-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-1)  
+
 Q2. 문제 상황에 대하여 jquery로 동작을 구현시킬 수 있는 코드를 작성해보세요
 
 Q3. 문제 상황에 대하여 HTML(detail 태그)로 동작을 구현시킬 수 있는 코드를 작성해보세요
