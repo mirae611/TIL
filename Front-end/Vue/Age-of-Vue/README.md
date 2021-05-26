@@ -1,4 +1,4 @@
-# Age-of-Vuejs.md  
+# Age-of-Vue
 - [인스턴스](#chapter-1)
 - [컴포넌트](#chapter-2)
 - [컴포넌트 통신 방법 - 기본](#chapter-3)
