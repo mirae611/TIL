@@ -18,10 +18,10 @@
 ```javascript
 var vm = new Vue({
   el: '#app',
-		data: {
-			message: 'hi'
-		},
-		methods: {}
+  data: {
+    message: 'hi'
+  },
+  methods: {}
 });
 ```  
 　  
@@ -29,36 +29,36 @@ var vm = new Vue({
 ## 컴포넌트<a id="chapter-2"></a>
 ```html
 <div id="app">
-	<app-header></app-header>
-	<app-content></app-content>
-	<app-footer></app-footer>
+  <app-header></app-header>
+  <app-content></app-content>
+  <app-footer></app-footer>
 </div>
 <div id="app2">
-	<app-header></app-header>
-	<app-content></app-content>
-	<app-footer></app-footer>
+  <app-header></app-header>
+  <app-content></app-content>
+  <app-footer></app-footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-// 전역 컴포넌트
-	Vue.component('app-header', {
-		template: '<h1>Header</h1>'
-	});
-	Vue.component('app-content', {
-		template: '<div>Content</div>'
-	});
-	new Vue({
-		el: '#app',
-		components: { // 지역 컴포넌트
-			'app-footer': {
-				template: '<footer>Footer</footer>'
-			}
-		}
-	});
-	new Vue({
-		el: '#app2'
-	});
+  // 전역 컴포넌트
+  Vue.component('app-header', {
+    template: '<h1>Header</h1>'
+  });
+  Vue.component('app-content', {
+    template: '<div>Content</div>'
+  });
+  new Vue({
+    el: '#app',
+    components: { // 지역 컴포넌트
+      'app-footer': {
+        template: '<footer>Footer</footer>'
+      }
+    }
+  });
+  new Vue({
+    el: '#app2'
+  });
 </script>
 ```  
 　  
@@ -67,78 +67,78 @@ var vm = new Vue({
 ### props
 ```html
 <div id="app">
-	<app-header :propsdata="message"></app-header>
-	<app-content :propsnum="num"></app-content>
+  <app-header :propsdata="message"></app-header>
+  <app-content :propsnum="num"></app-content>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-	var appHeader = {
-		template: '<h1>{{ propsdata }}</h1>',
-		props: ['propsdata']
-	}
-	var appContent = {
-		template: '<div>{{ propsnum }}</div>',
-		props: ['propsnum']
-	}
-
-	new Vue({
-		el: '#app',
-		components: { // 지역 컴포넌트
-			'app-header': appHeader,
-			'app-content': appContent
-		},
-		data: {
-			message: 'hi',
-			num: 10
-		}
-	});
-	</script>
+  var appHeader = {
+    template: '<h1>{{ propsdata }}</h1>',
+    props: ['propsdata']
+  }
+  var appContent = {
+    template: '<div>{{ propsnum }}</div>',
+    props: ['propsnum']
+  }
+  
+  new Vue({
+    el: '#app',
+    components: { // 지역 컴포넌트
+      'app-header': appHeader,
+      'app-content': appContent
+    },
+    data: {
+      message: 'hi',
+      num: 10
+    }
+  });
+</script>
 ```  
 　  
 ### emit
 ```html
 <div id="app">
-	<app-header @pass="logText"></app-header>
-	<app-content @count="countNumber"></app-content>
-	<p>count : {{ num }}</p>
+  <app-header @pass="logText"></app-header>
+  <app-content @count="countNumber"></app-content>
+  <p>count : {{ num }}</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-	var appHeader = {
-		template: '<button @click="passEvent">click me!</button>',
-		methods: {
-			passEvent: function() {
-				this.$emit('pass');
-			}
-		}
-	}
-	var appContent = {
-	template: '<button @click="addNumber">add</button>',
-		methods: {
-			addNumber: function() {
-				this.$emit('count');
-			}
-		}
-	}
-	new Vue({
-		el: '#app',
-		components: {
-			'app-header': appHeader,
-			'app-content': appContent
-		},
-		methods: {
-			logText: function() {
-				console.log('hi');
-			},
-			countNumber: function() {
-				this.num++;
-				console.log(this.num);
-			}
-		},
-		data: {
-			num: 0
-		}
-	});
+  var appHeader = {
+    template: '<button @click="passEvent">click me!</button>',
+    methods: {
+      passEvent: function () {
+        this.$emit('pass');
+      }
+    }
+  }
+  var appContent = {
+    template: '<button @click="addNumber">add</button>',
+    methods: {
+      addNumber: function () {
+        this.$emit('count');
+      }
+    }
+  }
+  new Vue({
+    el: '#app',
+    components: {
+      'app-header': appHeader,
+      'app-content': appContent
+    },
+    methods: {
+      logText: function () {
+        console.log('hi');
+      },
+      countNumber: function () {
+        this.num++;
+        console.log(this.num);
+      }
+    },
+    data: {
+      num: 0
+    }
+  });
 </script>
 ```  
 　  
@@ -146,38 +146,38 @@ var vm = new Vue({
 ## 컴포넌트 통신 방법 - 응용<a id="chapter-4"></a>
 ```html
 <div id="app">
-	<app-header :propsdata="num"></app-header>
-	<app-content @pass="deliverNum"></app-content>
+  <app-header :propsdata="num"></app-header>
+  <app-content @pass="deliverNum"></app-content>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-	var appHeader = {
-		props: ['propsdata'],
-		template: '<div>header</div>'
-	}
-	var appContent = {
-		template: '<div>content<button @click="passNum">pass</button></div>',
-		methods: {
-			passNum: function() {
-				this.$emit('pass', 10);
-			}
-		}
-	}
-	new Vue({
-		el: '#app',
-		components: {
-			'app-header': appHeader,
-			'app-content': appContent
-		},
-		data: {
-			num: 0
-		},
-		methods: {
-			deliverNum: function(value) {
-				this.num = value;
-			}
-		}
-	});
+  var appHeader = {
+    props: ['propsdata'],
+    template: '<div>header</div>'
+  }
+  var appContent = {
+    template: '<div>content<button @click="passNum">pass</button></div>',
+    methods: {
+      passNum: function () {
+        this.$emit('pass', 10);
+      }
+    }
+  }
+  new Vue({
+    el: '#app',
+    components: {
+      'app-header': appHeader,
+      'app-content': appContent
+    },
+    data: {
+      num: 0
+    },
+    methods: {
+      deliverNum: function (value) {
+        this.num = value;
+      }
+    }
+  });
 </script>
 ```  
 　  
@@ -187,44 +187,44 @@ var vm = new Vue({
 
 ```html
 <div id="app">
-	<div>
-		<router-link to="/login">Login</router-link>
-		<router-link to="/main">Main</router-link>
-	</div>
-	<router-view></router-view>
+  <div>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/main">Main</router-link>
+  </div>
+  <router-view></router-view>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
 <script>
-	var LoginComponenet = {
-		template: '<div>login</div>'
-	}
-	var MainComponent = {
-		template: '<div>main</div>'
-	}
+  var LoginComponenet = {
+    template: '<div>login</div>'
+  }
+  var MainComponent = {
+    template: '<div>main</div>'
+  }
 
-	var router = new VueRouter({
-		// routes에는 페이지의 라우팅 정보
-		routes: [
-			{
-				// path: url
-				path: '/login',
-				// component: 해당 url에 표시될 component
-				component: LoginComponenet
-			},
-			{
-				path: '/main',
-				component: MainComponent
-			}
-		]
-	});
+  var router = new VueRouter({
+    // routes에는 페이지의 라우팅 정보
+    routes: [
+      {
+        // path: url
+        path: '/login',
+        // component: 해당 url에 표시될 component
+        component: LoginComponenet
+      },
+      {
+        path: '/main',
+        component: MainComponent
+      }
+    ]
+  });
 
-	new Vue({
-		el: '#app',
-		router: router,
-		components: {}
-	});
+  new Vue({
+    el: '#app',
+    router: router,
+    components: {}
+  });
 </script>
 ```  
 　  
@@ -233,35 +233,35 @@ var vm = new Vue({
 참고자료 - [axios](https://github.com/axios/axios)
 ```html
 <div id="app">
-	<button @click="getData">get user</button>
-	<div>
-		{{ users }}
-	</div>
+  <button @click="getData">get user</button>
+  <div>
+    {{ users }}
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-		new Vue({
-		el: '#app',
-		data: {
-			users: []
-		},
-		methods: {
-			getData: function() {
-			var vm = this;
-			// jsonplaceholder라는 것은 rest api라고해서 js로 api를 요청할 때 테스트 해볼 수 있는 사이트
-			axios.get('https://jsonplaceholder.typicode.com/users')
-				.then(function (response) {
-					console.log(response.data);
-					vm.users = response.data;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-			}
-		}
-	});
+  new Vue({
+    el: '#app',
+    data: {
+      users: []
+    },
+    methods: {
+      getData: function () {
+        var vm = this;
+        // jsonplaceholder라는 것은 rest api라고해서 js로 api를 요청할 때 테스트 해볼 수 있는 사이트
+        axios.get('https://jsonplaceholder.typicode.com/users')
+          .then(function (response) {
+            console.log(response.data);
+            vm.users = response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+  });
 </script>
 ```  
 　  
@@ -270,48 +270,48 @@ var vm = new Vue({
 참고자료 - [axios](https://github.com/axios/axios)
 ```html
 <div id="app">
-    <!-- 데이터 바인딩 -->
-    <p :id="uuid" :class="name">{{ num }}</p>
+  <!-- 데이터 바인딩 -->
+  <p :id="uuid" :class="name">{{ num }}</p>
 
-    <p>{{ doubleNum }}</p>
-    <!-- v- if는 DOM을 제거, show는 DOM은 유지 -->
-    <div v-if="loading">
-        Loading...
-    </div>
-    <div v-else>
-        test user has benn logged in
-    </div>
-    <div v-show="loading">
-        Loading...
-    </div>
-    <input type="text" v-model="message">
-    <p>Message is: {{ message }}</p>
-    <button @click="logText">Click Me</button>
-    <input type="text" @keyup.enter='logText'>
+  <p>{{ doubleNum }}</p>
+  <!-- v- if는 DOM을 제거, show는 DOM은 유지 -->
+  <div v-if="loading">
+    Loading...
+  </div>
+  <div v-else>
+    test user has benn logged in
+  </div>
+  <div v-show="loading">
+    Loading...
+  </div>
+  <input type="text" v-model="message">
+  <p>Message is: {{ message }}</p>
+  <button @click="logText">Click Me</button>
+  <input type="text" @keyup.enter='logText'>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            num: 10,
-            uuid: 'abc1234',
-            name: 'text-blue',
-            loading: true,
-            message: ''
-        },
-        computed: {
-            doubleNum: function() {
-                return this.num * 2;
-            }
-        },
-        methods: {
-            logText: function() {
-                console.log('clicked');
-            }
-        }
-    });
+  new Vue({
+    el: '#app',
+    data: {
+      num: 10,
+      uuid: 'abc1234',
+      name: 'text-blue',
+      loading: true,
+      message: ''
+    },
+    computed: {
+      doubleNum: function () {
+        return this.num * 2;
+      }
+    },
+    methods: {
+      logText: function () {
+        console.log('clicked');
+      }
+    }
+  });
 </script>
 ```  
 　  
@@ -320,30 +320,30 @@ var vm = new Vue({
 ### watch
 ```html
 <div id="app">
-    {{num}}
-    <button @click="addNum">increase</button>
+  {{num}}
+  <button @click="addNum">increase</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            num: 10
-        },
-        watch: {
-            num: function () {
-                this.logText();
-            }
-        },
-        methods: {
-            addNum: function () {
-                this.num++;
-            },
-            logText: function () {
-                console.log('changed');
-            }
-        }
-    });
+  new Vue({
+    el: '#app',
+    data: {
+      num: 10
+    },
+    watch: {
+      num: function () {
+        this.logText();
+      }
+    },
+    methods: {
+      addNum: function () {
+        this.num++;
+      },
+      logText: function () {
+        console.log('changed');
+      }
+    }
+  });
 </script>
 ```  
 　  
@@ -357,53 +357,53 @@ var vm = new Vue({
 
 ```html
 <div id="app">
-    {{num}}
+  {{num}}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            num: 10
-        },
-        computed: {
-            doubleNum: function () {
-                return this.num * 2;
-            }
-        },
-        watch: {
-            num: function (newValue, oldValue) {
-                this.fetchUserByNumber(newValue);
-            }
-        },
-        methods: {
-            fetchUserByNumber: function (num) {
-                console.log(num);
-                // axios.get(num);
-            }
-        }
-    });
+  new Vue({
+    el: '#app',
+    data: {
+      num: 10
+    },
+    computed: {
+      doubleNum: function () {
+        return this.num * 2;
+      }
+    },
+    watch: {
+      num: function (newValue, oldValue) {
+        this.fetchUserByNumber(newValue);
+      }
+    },
+    methods: {
+      fetchUserByNumber: function (num) {
+        console.log(num);
+        // axios.get(num);
+      }
+    }
+  });
 </script>
 ```  
 　  
 ### computed의 활용
 ```html
 <div id="app">
-    <p :class="{warning: isError}">Hello</p>
+  <p :class="{warning: isError}">Hello</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            isError: false
-        },
-        computed: {
-            errorTextColor: function () {
-                return this.isError ? 'warning' : null;
-            }
-        }
-    });
+  new Vue({
+    el: '#app',
+    data: {
+      isError: false
+    },
+    computed: {
+      errorTextColor: function () {
+        return this.isError ? 'warning' : null;
+      }
+    }
+  });
 </script>
 ```
 
@@ -417,60 +417,60 @@ var vm = new Vue({
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue'
+  import AppHeader from './components/AppHeader.vue'
 
-export default {
-  name: 'App',
-  data: function() {
-    return {
-      str: 'Header'
-    }
-  },
-  components: {
-    'app-header': AppHeader,
-  },
-  methods: {
-    renewStr: function() {
-      this.str = 'hi';
-    }
-  },
-}
+  export default {
+    name: 'App',
+    data: function () {
+      return {
+        str: 'Header'
+      }
+    },
+    components: {
+      'app-header': AppHeader,
+    },
+    methods: {
+      renewStr: function () {
+        this.str = 'hi';
+      }
+    },
+  }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
 ```
 **components > AppHeader.vue**
 ```javascript
 <template>
   <header>
-      <h1>
-        {{propsdata}}
-        <button @click="sendEvent">send</button>
-      </h1>
+    <h1>
+      {{propsdata}}
+      <button @click="sendEvent">send</button>
+    </h1>
   </header>
 </template>
 
 <script>
-export default {
+  export default {
     props: ['propsdata'],
-    data: function() {
+    data: function () {
       return {}
     },
     methods: {
-      sendEvent: function() {
+      sendEvent: function () {
         this.$emit('renew');
       }
     },
-}
+  }
 </script>
 
 <style>
