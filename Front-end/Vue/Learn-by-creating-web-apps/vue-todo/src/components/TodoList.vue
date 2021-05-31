@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem, i) in todoItems" :key="i" class="shadow">
+      <li v-for="(todoItem, i) in propsdata" :key="i" class="shadow">
         <i class="check_btn fas fa-check" :class="{check_btn_completed: todoItem.completed}" @click="toggleComplete(todoItem)"></i>
         <span :class="{text_completed: todoItem.completed}">{{ todoItem.item }}</span>
         <span class="remove_btn" @click="removeTodo(todoItem, index)"><i class="fas fa-trash-alt"></i></span>
@@ -12,33 +12,16 @@
 
 <script>
 export default {
-  props: [],
-  data: function() {
-    return {
-      todoItems: [],
-    }
-  },
+  props: ['propsdata'],
   methods: {
     removeTodo: function (todoItem, index) {
-      // console.log(todoItem, index)
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index)
     },
     toggleComplete: function(todoItem) {
       todoItem.completed = !todoItem.completed;
       // localStrage 데이터를 갱신
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    }
-  },
-  created: function() { // 인스턴스가 생성되자마자 실행되는 life cycle hook
-    // console.log('created');
-    if(localStorage.length > 0) {
-      for(let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        }
-      }
     }
   }
 }
