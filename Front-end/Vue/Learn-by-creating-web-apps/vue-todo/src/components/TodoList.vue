@@ -2,9 +2,9 @@
   <div>
     <ul>
       <li v-for="(todoItem, i) in todoItems" :key="i" class="shadow">
-        <i class="check_btn fas fa-check" @click="toggleComplete"></i>
-        {{ todoItem }}
-        <span class="remove_btn" @click="removeTodo(todoItem, i)"><i class="fas fa-trash-alt"></i></span>
+        <i class="check_btn fas fa-check" :class="{check_btn_completed: todoItem.completed}" @click="toggleComplete(todoItem)"></i>
+        <span :class="{text_completed: todoItem.completed}">{{ todoItem.item }}</span>
+        <span class="remove_btn" @click="removeTodo(todoItem, index)"><i class="fas fa-trash-alt"></i></span>
       </li>
     </ul>
   </div>
@@ -19,21 +19,24 @@ export default {
     }
   },
   methods: {
-    removeTodo: function (todoItem, i) {
-      // console.log(todoItem, i)
+    removeTodo: function (todoItem, index) {
+      // console.log(todoItem, index)
       localStorage.removeItem(todoItem);
-      this.todoItems.splice(i, 1);
+      this.todoItems.splice(index, 1);
     },
-    toggleComplete: function() {
-      
+    toggleComplete: function(todoItem) {
+      todoItem.completed = !todoItem.completed;
+      // localStrage 데이터를 갱신
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   created: function() { // 인스턴스가 생성되자마자 실행되는 life cycle hook
-    // console.log('created');    
+    // console.log('created');
     if(localStorage.length > 0) {
       for(let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
         }
       }
     }
@@ -70,7 +73,7 @@ li {
 .check_btn_completed {
   color: #b3adad;
 }
-.text_complted {
+.text_completed {
   text-decoration: line-through;
   color: #b3adad;
 }
