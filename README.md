@@ -12,9 +12,6 @@
 - JavaScript 30 Day Challenge
 - JavaScript Basic
 ### Vue
-- Vue.js 끝장내기 - 실무에 필요한 모든 것
-- Vue.js 완벽 가이드 - 실습과 리팩토링으로 배우는 실전 개념
-- 프론트엔드 개발자를 위한 웹팩
 - [Vue.js 중급 강좌 - 웹앱 제작으로 배워보는 Vue.js, ES6, Vuex](https://github.com/mirae611/TIL/tree/main/Front-end/Vue/Learn-by-creating-web-apps/vue-todo)
 - [Vue.js 시작하기 - Age of Vue.js](https://github.com/mirae611/TIL/tree/main/Front-end/Vue/Age-of-Vue)
 - [Web Game with Vue](https://mirae611.github.io/TIL/Front-end/Vue/Web-Game-with-Vue/)
