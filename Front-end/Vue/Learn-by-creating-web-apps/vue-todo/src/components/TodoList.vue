@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem, i) in propsdata" :key="i" class="shadow">
-        <i class="check_btn fas fa-check" :class="{check_btn_completed: todoItem.completed}" @click="toggleComplete(todoItem)"></i>
+      <li v-for="(todoItem, index) in propsdata" :key="index" class="shadow">
+        <i class="check_btn fas fa-check" :class="{check_btn_completed: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
         <span :class="{text_completed: todoItem.completed}">{{ todoItem.item }}</span>
         <span class="remove_btn" @click="removeTodo(todoItem, index)"><i class="fas fa-trash-alt"></i></span>
       </li>
@@ -15,13 +15,10 @@ export default {
   props: ['propsdata'],
   methods: {
     removeTodo: function (todoItem, index) {
-      this.$emit('removeItem', todoItem, index)
+      this.$emit('removeItem', todoItem, index);
     },
-    toggleComplete: function(todoItem) {
-      todoItem.completed = !todoItem.completed;
-      // localStrage 데이터를 갱신
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    toggleComplete: function(todoItem, index) {
+      this.$emit('toggleItem', todoItem, index)
     }
   }
 }

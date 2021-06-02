@@ -2,7 +2,7 @@
   <div id="app">
     <todo-header></todo-header>
     <todo-input @addTodoItem="addOneItem"></todo-input>
-    <todo-list :propsdata="todoItems" @removeItem="removeOneItem"></todo-list>
+    <todo-list :propsdata="todoItems" @removeItem="removeOneItem" @toggleItem="toggleOneItem"></todo-list>
     <todo-footer></todo-footer>
   </div>
 </template>
@@ -28,6 +28,13 @@ export default {
     removeOneItem: function(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
+    },
+    toggleOneItem: function(todoItem, index) {
+      // todoItem.completed = !todoItem.completed;
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // localStrage 데이터를 갱신
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   created: function() { // 인스턴스가 생성되자마자 실행되는 life cycle hook
