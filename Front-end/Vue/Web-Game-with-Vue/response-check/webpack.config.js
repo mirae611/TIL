@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   devtool: 'eval',
   resolve: {
-    extensions: ['js', ''],
+    extensions: ['.js', '.vue'],
   },
   entry: {
     app: path.join(__dirname, 'main.js'),
@@ -16,11 +16,16 @@ module.exports = {
         test: /\.vue$/,
         use: 'vue-loader',
       },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader'],
+      }
     ],
   },
   plugins: [new VueloaderPlugin()],
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'dist'),
+    publicPath: '/dist',
   },
 };
