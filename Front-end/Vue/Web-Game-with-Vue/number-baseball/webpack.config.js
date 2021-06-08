@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     devtool: 'eval',
     resolve: {
-        extensions: ['js', '.vue'],
+        extensions: ['.js', '.vue'],
     },
     entry: {
         app: path.join(__dirname, 'main.js'),
