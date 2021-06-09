@@ -4,17 +4,17 @@
 - Refactoring
 - Big Data
 ## Front-end
-- [프론트엔드 실무 완성](https://github.com/mirae611/TIL/tree/main/Front-end/Front-end%20Project)
+- [프론트엔드 실무 완성](https://github.com/miraejang/learned/tree/main/Front-end/Front-end%20Project)
 ### JavaScript
 - 자바스크립트 머신러닝 TensorFlow.js
-- [바닐라 JS로 크롬 앱 만들기](https://mirae611.github.io/TIL/Front-end/JavaScript/Create_a_Chrome_app_with_vanilla_JS/Final.html)
-- [바닐라 JS로 그림판 만들기](https://mirae611.github.io/TIL/Front-end/JavaScript/Creating_Paint_with_Vanilla_JS/Creating_Paint.html)
+- [바닐라 JS로 크롬 앱 만들기](https://miraejang.github.io/learned/Front-end/JavaScript/Create_a_Chrome_app_with_vanilla_JS/Final.html)
+- [바닐라 JS로 그림판 만들기](https://miraejang.github.io/learned/Front-end/JavaScript/Creating_Paint_with_Vanilla_JS/Creating_Paint.html)
 - JavaScript 30 Day Challenge
 - JavaScript Basic
 ### Vue
-- [Vue.js 중급 강좌 - 웹앱 제작으로 배워보는 Vue.js, ES6, Vuex](https://github.com/mirae611/TIL/tree/main/Front-end/Vue/Learn-by-creating-web-apps/vue-todo)
-- [Vue.js 시작하기 - Age of Vue.js](https://github.com/mirae611/TIL/tree/main/Front-end/Vue/Age-of-Vue)
-- [Web Game with Vue](https://mirae611.github.io/TIL/Front-end/Vue/Web-Game-with-Vue/)
+- [Vue.js 중급 강좌 - 웹앱 제작으로 배워보는 Vue.js, ES6, Vuex](https://github.com/miraejang/learned/tree/main/Front-end/Vue/Learn-by-creating-web-apps/vue-todo)
+- [Vue.js 시작하기 - Age of Vue.js](https://github.com/miraejang/learned/tree/main/Front-end/Vue/Age-of-Vue)
+- [Web Game with Vue](https://miraejang.github.io/learned/Front-end/Vue/Web-Game-with-Vue/)
 ### React
 - 리액트 개념 정리 + 유튜브 클론 코딩 외 실전 프로젝트 완성
 ### TypeScript
