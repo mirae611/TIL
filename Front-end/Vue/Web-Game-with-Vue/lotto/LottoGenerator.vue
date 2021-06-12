@@ -24,6 +24,8 @@ function getWinNumbers() {
   return [...winNumbers, bonusNumber];  
 }
 
+const timeouts = []; 
+
 export default {
 	components: {
     LottoBall
@@ -44,20 +46,23 @@ export default {
       this.redo = false;
       this.showBalls();
     },
-    showBalls() {      
-      for (let i = 0; i < this.winNumbers.length - 1; i++) {
-        setTimeout(() => {
-          this.winBalls.push(this.winNumbers[i]);
-        }, (i + 1) * 1000);
-      }
-      setTimeout(() => {
-        this.bonus = this.winNumbers[6];
-        this.redo = true;
-      }, 7000);
-    }
+showBalls() {      
+  for (let i = 0; i < this.winNumbers.length - 1; i++) {
+    timeouts[i] = setTimeout(() => {
+      this.winBalls.push(this.winNumbers[i]);
+    }, (i + 1) * 1000);
+  }
+  timeouts[6] = setTimeout(() => {
+    this.bonus = this.winNumbers[6];
+    this.redo = true;
+  }, 7000);
+}
   },
   mounted() {
     this.showBalls();
+  },
+  beforeDestroy() {
+    timeouts.forEach(t => clearTimeout(t));
   }
 }
 </script>
