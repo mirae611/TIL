@@ -19,7 +19,13 @@ export default new Vuex.Store({
     turn: 'O', // O, X
     winner: '',
   },
-  mutations: { // vue의 computed와 비슷
+  getters: { // vue의 computed와 비슷
+    // computed와 비슷하다는 것은 캐싱도 되고, 기존의 state를 활용한 추가적인 작업을 할 때
+    turnMessage() {
+      return state.turn + '님이 승리하셨습니다.';
+    }
+  },
+  mutations: { // state를 수정할 떄 사용, 동기적으로
     [SET_WINNER](state, winner) { // mutations의 함수명은 대문자로 지어야 함(약속임)
       state.winner = winner;
     },
@@ -41,9 +47,6 @@ export default new Vuex.Store({
     [NO_WINNER](state) {
       state.winner = '';      
     }
-  },
-  getters: { // state를 수정할 떄 사용, 동기적으로
-
   },
   actions: { // 비동기르 사용할 때, 또는 여러 mutations을 연달아 실행할 때
 

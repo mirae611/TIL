@@ -15,6 +15,9 @@ export default {
   computed: {
     tableData() {
       return this.$store.state.tableData;
+    },
+    turnMessage() {
+      return this.$store.getters.turnMessage;
     }
   }
 }
