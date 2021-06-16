@@ -7,22 +7,24 @@
 </template>
 
 <script>
+import store from "./store";
 import TableComponent from './TableComponent';
 
 export default {
+  store,
   components: {
     TableComponent,
   },
-  data() {
-    return {
-      tableData: [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', ''],
-      ],
-      turn: 'O', // O, X
-      winner: '',
-    }
+  computed: {
+    tableData() {
+      return this.$store.state.tableData;
+    },
+    turn() {
+      return this.$store.state.turn;
+    },
+    winner() {
+      return this.$store.state.winner;
+    },
   }
 }
 </script>
