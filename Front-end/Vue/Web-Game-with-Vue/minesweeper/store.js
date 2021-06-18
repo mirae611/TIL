@@ -65,6 +65,7 @@ export default new Vuex.Store({
       mine: 0
     },
     timer: 0,
+    halted: true,
     result: '',
   },
   getters: {
@@ -83,13 +84,61 @@ export default new Vuex.Store({
       // 우리는 data의 property가 아닌 data전체를 수정하기 때문에 Vue.set()을 사용하지 않아도 된다.
       state.tableData = plantMine(row, cell, mine);
       state.timer = 0;
+      state.halted = false;
     },
-    [OPEN_CELL]() {},
-    [CLICK_MINE]() {},
-    [FLAG_CELL]() {},
-    [QUESTION_CELL]() {},
-    [NORMALIZE_CELL]() {},
-    [INCREMENT_TIMER]() {},
+    [OPEN_CELL](state, {row, cell}) {      
+      function checkAraound() { //오픈했을 때 주변 8칸의 지뢰 검색
+        let around = [];
+        // 이런 코드 굳이 간결하게 쓰려고 하지 않아도 된다.
+        // 이게 간결하게 쓰는 것도 좋지만 이런식으로 두면 가독성이 좋아져서 한눈에 이 코드가 하고있는게 뭔지 알 수 있다.
+        if (state.tableData[row - 1]) {        
+          around = around.concat([
+            state.tableData[row - 1][cell - 1], state.tableData[row - 1][cell], state.tableData[row - 1][cell + 1]
+          ]);
+        }
+        around = around.concat([
+          state.tableData[row][cell - 1], state.tableData[row][cell + 1]
+        ]);
+        if (state.tableData[row + 1]) {        
+          around = around.concat([
+            state.tableData[row + 1][cell - 1], state.tableData[row + 1][cell], state.tableData[row + 1][cell + 1]
+          ]);
+        }
+        const counted = around.filter(v => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v));
+        return counted.length;
+      }
+      const count = checkAraound();
+      Vue.set(state.tableData[row], cell, count);
+    },
+    [CLICK_MINE](state, {row, cell}) {
+      // 지뢰 밟은거
+      state.halted = true; // 게임 종료
+      Vue.set(state.tableData[row], cell, CODE.CLICKED_MINE);
+    },
+    [FLAG_CELL](state, {row, cell}) {
+      if(state.tableData[row][cell] === CODE.MINE) {
+        Vue.set(state.tableData[row], cell, CODE.FLAG_MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.FLAG);
+      }
+    },
+    [QUESTION_CELL](state, {row, cell}) {
+      if(state.tableData[row][cell] === CODE.FLAG_MINE) {
+        Vue.set(state.tableData[row], cell, CODE.QUESTION_MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.QUESTION);
+      }
+    },
+    [NORMALIZE_CELL](state, {row, cell}) {      
+      if(state.tableData[row][cell] === CODE.QUESTION_MINE) {
+        Vue.set(state.tableData[row], cell, CODE.MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.NORMAL);
+      }
+    },
+    [INCREMENT_TIMER](state) {
+      state.timer++;
+    },
   },
   actions: {
 
