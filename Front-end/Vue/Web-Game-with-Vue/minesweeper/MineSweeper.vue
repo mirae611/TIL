@@ -48,5 +48,6 @@ export default {
     height: 40px;
     border: 1px solid black;
     text-align: center;
+    cursor: default;
   }
 </style>

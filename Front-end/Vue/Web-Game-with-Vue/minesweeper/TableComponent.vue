@@ -53,7 +53,7 @@ export default {
       return (row, cell) => {
         switch (this.$store.state.tableData[row][cell]) {
           case CODE.MINE:
-            return 'X';
+            return '';
           case CODE.NORMAL:
             return '';
           case CODE.FLAG:
@@ -63,7 +63,7 @@ export default {
           case CODE.QUESTION_MINE:
             return '?';
           case CODE.CLICKED_MINE:
-            return '펑';
+            return '💥';
           default: 
             return this.$store.state.tableData[row][cell] || '';
         }
